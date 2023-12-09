@@ -1,4 +1,5 @@
 import logging
+import math
 from typing import Optional
 
 import numpy as np
@@ -199,6 +200,8 @@ class MiVOLO:
             if gender_probs is not None:
                 gender = "male" if gender_indx[index].item() == 0 else "female"
                 gender_score = gender_probs[index].item()
+                if math.isnan(gender_score):
+                    gender_score = 0
 
                 _logger.info(f"\tgender: {gender} [{int(gender_score * 100)}%]")
 
